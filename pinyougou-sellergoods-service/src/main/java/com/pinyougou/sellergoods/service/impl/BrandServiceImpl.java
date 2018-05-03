@@ -14,6 +14,7 @@ import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -173,6 +174,15 @@ public class BrandServiceImpl implements BrandService {
         Page<TbBrand> page= (Page<TbBrand>) tbBrands;
         System.out.println(page);
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    /**
+     * 品牌下拉列表展示
+     */
+    @Override
+    public List<Map> selectOptionList() {
+        System.out.println("--品牌下拉列表的展示--service层");
+       return brandMapper.selectOptionList();
     }
 
 }

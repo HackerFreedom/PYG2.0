@@ -1,5 +1,5 @@
  //控制层 
-app.controller('brandController' ,function($scope,$controller   ,brandService){	
+app.controller('brandController' ,function($scope,$controller,brandService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -40,30 +40,36 @@ app.controller('brandController' ,function($scope,$controller   ,brandService){
 			serviceObject=brandService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(
-			function(response){
-				if(response.success){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
-				}else{
-					alert(response.message);
-				}
-			}		
-		);				
+                function(response){
+                    if(response.type==0){
+                        //重新查询
+                        $scope.reloadList();//重新加载
+                    }else{
+                        alert(response.msg);
+                    }
+                }
+		);
 	}
-	
-	 
-	//批量删除 
-	$scope.dele=function(){			
-		//获取选中的复选框			
-		brandService.dele( $scope.selectIds ).success(
-			function(response){
-				if(response.success){
-					$scope.reloadList();//刷新列表
-					$scope.selectIds=[];
-				}						
-			}		
-		);				
-	}
+
+
+    //批量删除
+    $scope.dele=function(){
+        //获取选中的复选框
+        brandService.dele( $scope.selectIds ).success(
+            function(response){
+                if(response.type==0){
+                    $scope.reloadList();//刷新列表
+				alert(response.msg)
+                    $scope.selectIds=[];
+                }
+            }
+        )
+        .error(
+            function(response){
+                alert(response.msg);
+            }
+		)
+    }
 	
 	$scope.searchEntity={};//定义搜索对象 
 	

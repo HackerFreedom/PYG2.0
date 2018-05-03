@@ -1,5 +1,5 @@
  //控制层 
-app.controller('specificationController' ,function($scope,$controller   ,specificationService){	
+app.controller('specificationController' ,function($scope,$controller  ,specificationService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -25,27 +25,31 @@ app.controller('specificationController' ,function($scope,$controller   ,specifi
 	//查询实体 
 	$scope.findOne=function(id){				
 		specificationService.findOne(id).success(
+
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+                console.log(id)
 			}
 		);				
 	}
 	
-	//保存 
+	//保存 (修改对象和保存)
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
+		var serviceObject;//服务层对象  (方法的名称)
 		if($scope.entity.specification.id!=null){//如果有ID
-			serviceObject=specificationService.update( $scope.entity ); //修改  
+			serviceObject=specificationService.update( $scope.entity ); //修改  ,$scope.entity 说明把规格和规格列表封装到一起.
 		}else{
 			serviceObject=specificationService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(
 			function(response){
-				if(response.success){
+				if(response.type==0){
+					//保存成功
+					alert(response.msg)
 					//重新查询 
 		        	$scope.reloadList();//重新加载
 				}else{
-					alert(response.message);
+					alert(response.msg);
 				}
 			}		
 		);				
@@ -57,7 +61,7 @@ app.controller('specificationController' ,function($scope,$controller   ,specifi
 		//获取选中的复选框			
 		specificationService.dele( $scope.selectIds ).success(
 			function(response){
-				if(response.success){
+				if(response.type==0){
 					$scope.reloadList();//刷新列表
 					$scope.selectIds=[];
 				}						

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/brand")
@@ -112,5 +113,13 @@ public class BrandController {
     public PageResult search(@RequestBody  TbBrand tbBrand ,int page,int rows){
         System.out.println("--查询条件的控制层--");
          return brandService.findPage(tbBrand, page, rows);
+    }
+    /**
+     * 品牌下拉列表展示
+     */
+    @RequestMapping("/selectOptionList")
+    public List<Map> selectOptionList(){
+        System.out.println("下拉列表展示--控制层");
+        return brandService.selectOptionList();
     }
 }

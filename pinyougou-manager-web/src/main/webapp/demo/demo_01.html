@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>入门小demo_01</title>
+    <script src="../plugins/angularjs/angular.min.js"></script>
+    <script>
+        $scope.entity={data:[{id:'id'},{name:"jj"}]};
+    </script>
+</head>
+<body ng-app>
+你的名字:<input ng-model="show" >
+        {{100+200}}
+{{show}}你好
+<tr ng-repeat="en in entity">
+    {{en.id}};
+
+</tr>
+</body>
+</html>

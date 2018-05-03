@@ -12,10 +12,10 @@
     <artifactId>pinyougou-manager-web</artifactId>
     <packaging>war</packaging>
 
-   <!-- <name>pinyougou-manager-web Maven Webapp</name>
-    &lt;!&ndash; FIXME change it to the project's website &ndash;&gt;
-    <url>http://www.example.com</url>-->
-<!--运营商管理的后台-->
+    <!-- <name>pinyougou-manager-web Maven Webapp</name>
+     &lt;!&ndash; FIXME change it to the project's website &ndash;&gt;
+     <url>http://www.example.com</url>-->
+    <!--运营商管理的后台-->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -89,6 +89,15 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!--身份验证-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
 
 
         <dependency>
@@ -99,7 +108,7 @@
 
     </dependencies>
 
-<!--浏览器的配置-->
+    <!--浏览器的配置-->
     <build>
         <plugins>
             <plugin>

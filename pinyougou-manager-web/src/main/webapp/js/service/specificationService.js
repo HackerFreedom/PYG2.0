@@ -3,35 +3,35 @@ app.service('specificationService',function($http){
 	    	
 	//读取列表数据绑定到表单中
 	this.findAll=function(){
-		return $http.get('../specification/findAll.do');		
+		return $http.get('../specification/findAll.action');
 	}
 	//分页 
 	this.findPage=function(page,rows){
-		return $http.get('../specification/findPage.do?page='+page+'&rows='+rows);
+		return $http.get('../specification/findPage.action?page='+page+'&rows='+rows);
 	}
 	//查询实体
 	this.findOne=function(id){
-		return $http.get('../specification/findOne.do?id='+id);
+		return $http.get('../specification/findOne.action?id='+id);
 	}
 	//增加 
 	this.add=function(entity){
-		return  $http.post('../specification/add.do',entity );
+		return  $http.post('../specification/add.action',entity );
 	}
 	//修改 
 	this.update=function(entity){
-		return  $http.post('../specification/update.do',entity );
+		return  $http.post('../specification/update.action',entity );
 	}
 	//删除
 	this.dele=function(ids){
-		return $http.get('../specification/delete.do?ids='+ids);
+		return $http.get('../specification/delete.action?ids='+ids);
 	}
 	//搜索
 	this.search=function(page,rows,searchEntity){
-		return $http.post('../specification/search.do?page='+page+"&rows="+rows, searchEntity);
+		return $http.post('../specification/search.action?page='+page+"&rows="+rows, searchEntity);
 	}    	
 	//下拉列表
 	this.selectOptionList=function(){
-		return $http.get('../specification/selectOptionList.do');
+		return $http.get('../specification/selectOptionList.action');
 	}
 	
 });

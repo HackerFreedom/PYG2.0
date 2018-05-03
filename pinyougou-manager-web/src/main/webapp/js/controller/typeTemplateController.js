@@ -1,5 +1,5 @@
  //控制层 
-app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemplateService,brandService,specificationService){	
+app.controller('typeTemplateController' ,function($scope,$controller ,typeTemplateService,brandService,specificationService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -26,7 +26,8 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 	$scope.findOne=function(id){				
 		typeTemplateService.findOne(id).success(
 			function(response){
-				$scope.entity= response;		
+				$scope.entity= response;
+				console.log(entity);
 				
 				//转换字符串为json对象（集合）
 				$scope.entity.brandIds=  JSON.parse( $scope.entity.brandIds);
@@ -37,21 +38,22 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 		);				
 	}
 	
-	//保存 
+	//保存 (修改)
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
 		if($scope.entity.id!=null){//如果有ID
-			serviceObject=typeTemplateService.update( $scope.entity ); //修改  
+			serviceObject=typeTemplateService.update( $scope.entity); //修改
 		}else{
-			serviceObject=typeTemplateService.add( $scope.entity  );//增加 
+			serviceObject=typeTemplateService.add( $scope.entity);//增加
 		}				
 		serviceObject.success(
 			function(response){
-				if(response.success){
+				if(response.type==0){
 					//重新查询 
 		        	$scope.reloadList();//重新加载
+				//	alert(response.msg)
 				}else{
-					alert(response.message);
+					alert(response.msg);
 				}
 			}		
 		);				
@@ -63,7 +65,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 		//获取选中的复选框			
 		typeTemplateService.dele( $scope.selectIds ).success(
 			function(response){
-				if(response.success){
+				if(response.type==0){
 					$scope.reloadList();//刷新列表
 					$scope.selectIds=[];
 				}						
@@ -84,6 +86,7 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 	}
 	
 	$scope.brandList={data:[]};//品牌列表
+	//数据格式[{"":'',"":''}]
     
 	//读取品牌列表
 	$scope.findBrandList=function(){
@@ -107,6 +110,8 @@ app.controller('typeTemplateController' ,function($scope,$controller   ,typeTemp
 	
 	//增加扩展属性行
 	$scope.addTableRow=function(){
+		console.log(entity);
+
 		$scope.entity.customAttributeItems.push({});
 	}
 	//删除扩展属性行
