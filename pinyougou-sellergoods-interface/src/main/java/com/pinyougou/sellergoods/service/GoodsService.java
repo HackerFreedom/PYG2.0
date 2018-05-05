@@ -2,6 +2,7 @@ package com.pinyougou.sellergoods.service;
 import java.util.List;
 import com.pinyougou.pojo.TbGoods;
 
+import com.pinyougou.pojogroup.Goods;
 import entity.PageResult;
 /**
  * 服务层接口
@@ -26,8 +27,11 @@ public interface GoodsService {
 	
 	/**
 	 * 增加
+	 * 添加的是一个实体类的对象,包含有
+	 *  1.商品SPU ,商品的统称
+	 *  2. 商品详细信息
 	*/
-	public void add(TbGoods goods);
+	public void add(Goods goods);
 	
 	
 	/**

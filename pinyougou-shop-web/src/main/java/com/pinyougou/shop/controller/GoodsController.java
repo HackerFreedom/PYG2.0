@@ -1,6 +1,8 @@
 package com.pinyougou.shop.controller;
 import java.util.List;
 
+import com.pinyougou.pojogroup.Goods;
+import entity.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,20 +48,16 @@ public class GoodsController {
 	 * @param goods
 	 * @return
 	 */
-	/*@RequestMapping("/add")
+	@RequestMapping("/add")
 	public Result add(@RequestBody Goods goods){
-		//获取商家ID
-		String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
-		goods.getGoods().setSellerId(sellerId);//设置商家ID
-		
 		try {
 			goodsService.add(goods);
-			return new Result(true, "增加成功");
+			return new Result("增加商品信息成功", 0);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "增加失败");
+			return new Result("增加商品信息失败", 1);
 		}
-	}*/
+	}
 	
 	/**
 	 * 修改

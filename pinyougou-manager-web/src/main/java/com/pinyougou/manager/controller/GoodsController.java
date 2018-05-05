@@ -1,6 +1,7 @@
 package com.pinyougou.manager.controller;
 import java.util.List;
 
+import com.pinyougou.pojogroup.Goods;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,13 +48,13 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/add")
-	public Result add(@RequestBody TbGoods goods){
+	public Result add(@RequestBody Goods goods){
 		try {
 			goodsService.add(goods);
-			return new Result("增加成功", 0);
+			return new Result("增加商品信息成功", 0);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result("增加失败", 1);
+			return new Result("增加商品信息失败", 1);
 		}
 	}
 	
