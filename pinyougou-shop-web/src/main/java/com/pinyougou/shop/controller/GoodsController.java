@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.pinyougou.pojogroup.Goods;
 import entity.Result;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,16 +65,16 @@ public class GoodsController {
 	 * @param goods
 	 * @return
 	 */
-	/*@RequestMapping("/update")
+@RequestMapping("/update")
 	public Result update(@RequestBody TbGoods goods){
 		try {
 			goodsService.update(goods);
-			return new Result(true, "修改成功");
+			return new Result("修改成功", 0);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "修改失败");
+			return new Result("修改失败", 1);
 		}
-	}	*/
+	}
 	
 	/**
 	 * 获取实体
@@ -81,7 +82,7 @@ public class GoodsController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public TbGoods findOne(Long id){
+	public Goods findOne(Long id){
 		return goodsService.findOne(id);		
 	}
 	
@@ -90,16 +91,16 @@ public class GoodsController {
 	 * @param ids
 	 * @return
 	 */
-	/*@RequestMapping("/delete")
+	@RequestMapping("/delete")
 	public Result delete(Long [] ids){
 		try {
 			goodsService.delete(ids);
-			return new Result(true, "删除成功"); 
+			return new Result("删除成功", 0);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new Result(false, "删除失败");
+			return new Result("删除失败", 1);
 		}
-	}*/
+	}
 	
 		/**
 	 * 查询+分页
@@ -110,6 +111,12 @@ public class GoodsController {
 	 */
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody TbGoods goods, int page, int rows  ){
+		System.out.println("-----search-----");
+		//获取商家的id,当前登录的用户
+		String name = SecurityContextHolder.getContext().getAuthentication().getName();
+		//添加查询条件
+		goods.setSellerId(name);
+		System.out.println("商品管理的查询信息,当前id:"+name);
 		return goodsService.findPage(goods, page, rows);		
 	}
 	

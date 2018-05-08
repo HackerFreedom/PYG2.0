@@ -59,7 +59,10 @@ public interface TypeTemplateService {
 	 * @return
 	 */
 	public PageResult findPage(TbTypeTemplate typeTemplate, int pageNum, int pageSize);
-	
 
-	
+	/**
+	 * 由于我们不仅要显示规格的名称,还要显示规格下的列表名称,所以需要添加方法来
+	 * 查询所有的规格属性
+	 */
+		List<Map> findSpecList(Long id);
 }
